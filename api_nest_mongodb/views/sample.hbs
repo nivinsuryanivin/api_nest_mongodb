@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample</title>
+</head>
+<body>
+    <form onsubmit="datashow(this)" id=" formElement">
+        <h1>hello</h1>
+        <input type="text" id="pro_id" name="pro_id">
+        <input type="text" id="pro_name" name="pro_name">
+         <input type="text" id="pro_price" name="pro_price">
+       
+        <button type="submit"></button>
+    </form>
+    <script>
+       async function datashow(formElement)
+        {
+            //const data = { pro_id: 'example',pro_name:'orange',pro_price:20 };
+             const formData = new FormData(formElement);
+            const data = {};
+            formData.forEach((value, key) => (data[key] = value));
+       
+
+fetch('/product/insert_product', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+
+
+/*         
+        const formData = new FormData(formElement);
+        const data = {};
+        formData.forEach((value, key) => (data[key] = value));
+                    // Log the data.
+            console.log(data);
+           
+      
+        
+  try {
+    const response = await fetch("/product/insert_product", {
+      method: "POST",
+      body: JSON.stringify(data) ,
+    }).then(response=>response.json());
+
+        }
+        catch (e) {
+            document.write(e)
+      console.log(e);
+     console.log('try not not blog executed');
+  }
+        }*/
+        }
+    </script>
+</body>
+</html>

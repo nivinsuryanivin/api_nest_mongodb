@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>login page</title>
+
+    <style>
+body {
+    background-color: #43e9fb
+}
+
+.flex {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto
+}
+
+@media (max-width:991.98px) {
+    .padding {
+        padding: 1.5rem
+    }
+}
+
+@media (max-width:767.98px) {
+    .padding {
+        padding: 1rem
+    }
+}
+
+.padding {
+    padding: 5rem
+}
+
+.card {
+    background: #fff;
+    border-width: 0;
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+    margin-bottom: 1.5rem
+}
+
+.card-header {
+    background-color: transparent;
+    border-color: rgba(160, 175, 185, .15);
+    background-clip: padding-box
+}
+
+.card-body p:last-child {
+    margin-bottom: 0
+}
+
+.card-hide-body .card-body {
+    display: none
+}
+
+.form-check-input.is-invalid~.form-check-label,
+.was-validated .form-check-input:invalid~.form-check-label {
+    color: #f54394
+}
+
+
+    </style>
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body style= "background-color: #43e9fb">
+<div id="content" class="flex">
+    <div class=""> 
+        <div class="page-content page-container" id="page-content">
+            <div class="padding">
+                <div class="row">
+                    <div class="col-md-5 mx-auto">
+                        <div class="card center">
+                            <div class="card-header"><strong>Register to your account</strong></div>
+                            <div class="card-body">
+                                <form onsubmit="submitdata(this)" id="userDetailForm" name="userDetailForm" enctype="multipart/form-data">
+                                   <div class="form-group"><label class="text-muted" for="exampleInputEmail1">UserName</label>
+                                    <input type="text" class="form-control" name="user_name" aria-describedby="emailHelp" placeholder="Enter user name"> <small id="emailHelp" class="form-text text-muted">Create unique UserName</small></div>
+                                    
+                                   
+                                    <div class="form-group"><label class="text-muted" for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" name="email"id="user_name" aria-describedby="emailHelp" placeholder="Enter email"> <small id="emailHelp" class="form-text text-muted">We don't share email with anyone</small></div>
+                                    <div class="form-group"><label class="text-muted" for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" name="password" id="email" placeholder="Password"> <small id="passwordHelp" class="form-text text-muted">your password is saved in encrypted form</small></div>
+                                    <div class="form-group">
+                                        <div class="form-check"><input type="checkbox" class="form-check-input"><label class="form-check-label">Check me out</label></div>
+                                    </div> <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+     async function submitdata(userDetailForm)
+        {
+            //const data = { pro_id: 'example',pro_name:'orange',pro_price:20 };
+             const formData = new FormData(userDetailForm);
+            const data = {};
+            formData.forEach((value, key) => (data[key] = value));
+       
+
+    fetch('/registration/insert_user', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+        }
+
+
+</script>
+  </body>
+</html>
